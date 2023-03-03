@@ -1,0 +1,38 @@
+/* mixins */
+@import 'base/mixins.scss';
+
+/* base */
+@import 'base/fonts';
+@import 'base/variables';
+@import 'base/normalize';
+@import 'base/typography';
+@import 'base/default';
+
+/* blocks */
+/* Пример подключения*/
+@import 'blocks/busket/busket';
+@import 'blocks/popup/popup';
+
+/* pages */
+/* @import 'index'; */
+
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	outline: 0;
+	&:before,
+	&:after {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+}
+html
+{
+	line-height: $mainLineHeight;
+	font-size: $mainFontSize;
+	color: $mainFontColor;
+	-webkit-font-smoothing: antialiased;
+}
