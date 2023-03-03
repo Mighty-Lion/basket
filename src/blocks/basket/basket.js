@@ -1,6 +1,7 @@
 o2.basket = {
 	// state:{
-
+		// sum: 0,
+		// count: 0,
 	// },
 
 	plus() {
