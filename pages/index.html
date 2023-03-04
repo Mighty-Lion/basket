@@ -26,7 +26,7 @@
 			<a class="button" onclick="o2.popup.open('_popup-content')">Button</a>
 
 			<div class="popup _overlay"></div>
-			<div class="popup-content _popup-content">
+			<div class="popup__content _popup-content">
 				<div class="basket">
 					<div class="basket__close" onclick="o2.popup.close()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<rect y="-6.10352e-05" width="24" height="24" rx="12" fill="#3F4043" />
@@ -35,7 +35,7 @@
 					</div>
 					<h2 class="basket__header">Корзина</h2>
 					<div class="basket__list">
-						<div class="basket__item">
+						<div class="basket__item _basket-item">
 							<picture>
 								<source srcset="./img/image.webp" type="image/webp">
 								<img class="basket__img" src="./img/image.jpg" alt="image name">
@@ -43,15 +43,15 @@
 							<div class="basket__text">
 								<div class="basket__text-title">Aesop</div>
 								<div class="basket__text-name">Rose Hair & Scalp Moisturising Masque</div>
-								<div class="basket__text-price _price">5 600 ₽</div>
+								<div class="basket__text-price _price">1 280 000 000 ₽</div>
 							</div>
 							<div class="basket__buttons _buttons">
-								<button class="basket__button" onclick="o2.basket.minus()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<button class="basket__button" onclick="o2.basket.onButton(this, 1, false)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="12" y="7.49994" width="1" height="7" transform="rotate(90 12 7.49994)" fill="#131313" />
 									</svg>
 								</button>
 								<div class="basket__button basket__button--color-inversion _counter">0</div>
-								<button class="basket__button" onclick="o2.basket.plus()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<button class="basket__button" onclick="o2.basket.onButton(this, 1, true)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="7.5" y="3.49994" width="1" height="9" fill="#131313" />
 										<rect x="12.5" y="7.49994" width="1" height="9" transform="rotate(90 12.5 7.49994)" fill="#131313" />
 									</svg>
@@ -59,7 +59,7 @@
 							</div>
 						</div>
 
-						<div class="basket__item">
+						<div class="basket__item _basket-item">
 							<picture>
 								<source srcset="./img/image.webp" type="image/webp">
 								<img class="basket__img" src="./img/image.jpg" alt="image name">
@@ -67,15 +67,15 @@
 							<div class="basket__text">
 								<div class="basket__text-title">Aesop</div>
 								<div class="basket__text-name">Rose Hair & Scalp Moisturising Masque</div>
-								<div class="basket__text-price _price">5 600 ₽</div>
+								<div class="basket__text-price _price">100 280 000 000 ₽</div>
 							</div>
 							<div class="basket__buttons _buttons">
-								<button class="basket__button" onclick="o2.basket.minus()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<button class="basket__button" onclick="o2.basket.onButton(this, 1, false)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="12" y="7.49994" width="1" height="7" transform="rotate(90 12 7.49994)" fill="#131313" />
 									</svg>
 								</button>
 								<div class="basket__button basket__button--color-inversion _counter">0</div>
-								<button class="basket__button" onclick="o2.basket.plus()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<button class="basket__button" onclick="o2.basket.onButton(this, 1, true)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="7.5" y="3.49994" width="1" height="9" fill="#131313" />
 										<rect x="12.5" y="7.49994" width="1" height="9" transform="rotate(90 12.5 7.49994)" fill="#131313" />
 									</svg>
@@ -83,7 +83,7 @@
 							</div>
 						</div>
 
-						<div class="basket__item">
+						<div class="basket__item _basket-item">
 							<picture>
 								<source srcset="./img/image.webp" type="image/webp">
 								<img class="basket__img" src="./img/image.jpg" alt="image name">
@@ -94,12 +94,12 @@
 								<div class="basket__text-price _price">5 600 ₽</div>
 							</div>
 							<div class="basket__buttons _buttons">
-								<button class="basket__button" onclick="o2.basket.minus()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<button class="basket__button" onclick="o2.basket.onButton(this, 1, false)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="12" y="7.49994" width="1" height="7" transform="rotate(90 12 7.49994)" fill="#131313" />
 									</svg>
 								</button>
 								<div class="basket__button basket__button--color-inversion _counter">0</div>
-								<button class="basket__button" onclick="o2.basket.plus()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<button class="basket__button" onclick="o2.basket.onButton(this, 1, true)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="7.5" y="3.49994" width="1" height="9" fill="#131313" />
 										<rect x="12.5" y="7.49994" width="1" height="9" transform="rotate(90 12.5 7.49994)" fill="#131313" />
 									</svg>
@@ -107,7 +107,7 @@
 							</div>
 						</div>
 
-						<div class="basket__item">
+						<div class="basket__item _basket-item">
 							<picture>
 								<source srcset="./img/image.webp" type="image/webp">
 								<img class="basket__img" src="./img/image.jpg" alt="image name">
@@ -118,12 +118,12 @@
 								<div class="basket__text-price _price">5 600 ₽</div>
 							</div>
 							<div class="basket__buttons _buttons">
-								<button class="basket__button" onclick="o2.basket.minus()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<button class="basket__button" onclick="o2.basket.onButton(this, 1, false)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="12" y="7.49994" width="1" height="7" transform="rotate(90 12 7.49994)" fill="#131313" />
 									</svg>
 								</button>
 								<div class="basket__button basket__button--color-inversion _counter">0</div>
-								<button class="basket__button" onclick="o2.basket.plus()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<button class="basket__button" onclick="o2.basket.onButton(this, 1, true)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="7.5" y="3.49994" width="1" height="9" fill="#131313" />
 										<rect x="12.5" y="7.49994" width="1" height="9" transform="rotate(90 12.5 7.49994)" fill="#131313" />
 									</svg>
@@ -131,7 +131,7 @@
 							</div>
 						</div>
 
-						<div class="basket__item">
+						<div class="basket__item _basket-item">
 							<picture>
 								<source srcset="./img/image.webp" type="image/webp">
 								<img class="basket__img" src="./img/image.jpg" alt="image name">
@@ -142,12 +142,12 @@
 								<div class="basket__text-price _price">5 600 ₽</div>
 							</div>
 							<div class="basket__buttons _buttons">
-								<button class="basket__button" onclick="o2.basket.minus()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<button class="basket__button" onclick="o2.basket.onButton(this, 1, false)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="12" y="7.49994" width="1" height="7" transform="rotate(90 12 7.49994)" fill="#131313" />
 									</svg>
 								</button>
-								<div class="basket__button basket__button--color-inversion _counter _counter">0</div>
-								<button class="basket__button" onclick="o2.basket.plus()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<div class="basket__button basket__button--color-inversion _counter">0</div>
+								<button class="basket__button" onclick="o2.basket.onButton(this, 1, true)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="7.5" y="3.49994" width="1" height="9" fill="#131313" />
 										<rect x="12.5" y="7.49994" width="1" height="9" transform="rotate(90 12.5 7.49994)" fill="#131313" />
 									</svg>
@@ -155,7 +155,7 @@
 							</div>
 						</div>
 
-						<div class="basket__item">
+						<div class="basket__item _basket-item">
 							<picture>
 								<source srcset="./img/image.webp" type="image/webp">
 								<img class="basket__img" src="./img/image.jpg" alt="image name">
@@ -166,12 +166,12 @@
 								<div class="basket__text-price _price">5 600 ₽</div>
 							</div>
 							<div class="basket__buttons _buttons">
-								<button class="basket__button" onclick="o2.basket.minus()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<button class="basket__button" onclick="o2.basket.onButton(this, 1, false)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="12" y="7.49994" width="1" height="7" transform="rotate(90 12 7.49994)" fill="#131313" />
 									</svg>
 								</button>
 								<div class="basket__button basket__button--color-inversion _counter">0</div>
-								<button class="basket__button" onclick="o2.basket.plus()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<button class="basket__button" onclick="o2.basket.onButton(this, 1, true)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="7.5" y="3.49994" width="1" height="9" fill="#131313" />
 										<rect x="12.5" y="7.49994" width="1" height="9" transform="rotate(90 12.5 7.49994)" fill="#131313" />
 									</svg>
@@ -179,7 +179,7 @@
 							</div>
 						</div>
 
-						<div class="basket__item">
+						<div class="basket__item _basket-item">
 							<picture>
 								<source srcset="./img/image.webp" type="image/webp">
 								<img class="basket__img" src="./img/image.jpg" alt="image name">
@@ -190,12 +190,12 @@
 								<div class="basket__text-price _price">5 600 ₽</div>
 							</div>
 							<div class="basket__buttons _buttons">
-								<button class="basket__button" onclick="o2.basket.minus()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<button class="basket__button" onclick="o2.basket.onButton(this, 1, false)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="12" y="7.49994" width="1" height="7" transform="rotate(90 12 7.49994)" fill="#131313" />
 									</svg>
 								</button>
 								<div class="basket__button basket__button--color-inversion _counter">0</div>
-								<button class="basket__button" onclick="o2.basket.plus()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<button class="basket__button" onclick="o2.basket.onButton(this, 1, true)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="7.5" y="3.49994" width="1" height="9" fill="#131313" />
 										<rect x="12.5" y="7.49994" width="1" height="9" transform="rotate(90 12.5 7.49994)" fill="#131313" />
 									</svg>

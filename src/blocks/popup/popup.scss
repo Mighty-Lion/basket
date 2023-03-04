@@ -14,10 +14,11 @@
 
 }
 
-.popup-content
+.popup__content
 {
 	position: absolute;
-	left: -100%;
+	// left: -100vw;
+	width: 100%;
 	max-width: 600px;
 	border-radius: 5px;
 	background-color: white;
