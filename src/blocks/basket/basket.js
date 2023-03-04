@@ -119,34 +119,44 @@ o2.basket ={
 
 	checkSign(sign, instance, size, count, price, counter) {
 		if (sign === true) {
-			this.incrementCounter(count, size, price, counter);
+			this.incrementCounter(count, size, counter);
+			this.incrementSum(price);
 		} else if (count > 0) {
-			this.decrementCounter(count, size, price, counter);
+			this.decrementCounter(count, size, counter);
+			this.decrementSum(price);
 		}
 	},
 
-	incrementCounter(count, size, price, counter){
+	incrementCounter(count, size, counter) {
 		count += size;
-		this.state.sum += price;
 		this.state.count += size;
-		this.render(count, counter, this.state.sum, this.state.count);
+		this.render(count, counter, this.state.count);
 	},
 
-	decrementCounter(count, size, price, counter){
+	decrementCounter(count, size, counter) {
 		count -= size;
-		this.state.sum -= price;
 		this.state.count -= size;
-		this.render(count, counter, this.state.sum, this.state.count);
+		this.render(count, counter, this.state.count);
 	},
 
-	render(count=null, counter=null, sumInt=null, stateCount) {
+	incrementSum(price) {
+		this.state.sum += price;
+		this.render( null, null, null, this.state.sum);
+	},
+
+	decrementSum(price) {
+		this.state.sum -= price;
+		this.render( null, null, null, this.state.sum);
+	},
+
+	render(count=null, counter=null, stateCount=null, sumInt=null) {
 		const sumContainer = document.querySelector('._sum');
 		const countContainer = document.querySelector('._counters');
 		if(counter !== null) {
 			counter.innerText = count;
 		}
-		if (stateCount > -1) {
-			countContainer.textContent = String(stateCount) + " товаров" ;
+		if (stateCount !== null) {
+			countContainer.textContent = String(stateCount) + " товаров";
 		}
 		if (sumInt !==null) {
 			let sum = String(sumInt).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') + " ₽";
