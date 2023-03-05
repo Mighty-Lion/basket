@@ -2,7 +2,7 @@
 	<div class="basket">
 		<div class="basket__close" onclick="o2.popup.close()">{% include '/assets/svg/close.svg' %}</div>
 			<h2 class="basket__header">Корзина</h2>
-			<div class="basket__list">
+			<div class="basket__list _basket-list">
 				<div class="basket__item _basket-item">
 					<picture>
 						<source srcset="./img/image.webp" type="image/webp">
@@ -15,7 +15,7 @@
 					</div>
 					<div class="basket__buttons _buttons">
 						<button class="basket__button" onclick="o2.basket.onButton(this, 1, false)">{% include '/assets/svg/busketMinus.svg' %}</button>
-						<div class="basket__button basket__button--color-inversion _counter">0</div>
+						<div class="basket__button basket__button--color-inversion _counter">2</div>
 						<button class="basket__button" onclick="o2.basket.onButton(this, 1, true)">{% include '/assets/svg/busketPlus.svg' %}</button>
 					</div>
 				</div>
@@ -117,7 +117,7 @@
 					</div>
 					<div class="basket__buttons _buttons">
 						<button class="basket__button" onclick="o2.basket.onButton(this, 1, false)">{% include '/assets/svg/busketMinus.svg' %}</button>
-						<div class="basket__button basket__button--color-inversion _counter">0</div>
+						<div class="basket__button basket__button--color-inversion _counter">2</div>
 						<button class="basket__button" onclick="o2.basket.onButton(this, 1, true)">{% include '/assets/svg/busketPlus.svg' %}</button>
 					</div>
 				</div>
