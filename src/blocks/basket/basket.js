@@ -200,9 +200,8 @@ o2.basket ={
 		this.collectFirst = false;
 
 		this.countInit();
-		// console.log(this.state)
-		// 
-		this.render(null);
+
+		this.render();
 	},
 
 	onButton(instance, size, sign) {
@@ -283,17 +282,18 @@ o2.basket ={
 		}
 	},
 
-	render(instance=null) {
+	render() {
 		console.log('render');
 		const allCounterContainer = document.querySelector('._counters');
 		const sumContainer = document.querySelector('._sum');
-
+		let counterContainer = null;
+		let counterId = 0;
 		if (this.renderFirst === true) {
 			allCounterContainer.innerText = String(`${this.state.count} товаров`);
 			sumContainer.innerText = String(this.state.sum).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') + " ₽";
 		} else {
-			const counterContainer = instance.closest('._buttons').querySelector('._counter');
-			let counterId = Number(counterContainer.dataset.idCounter);
+			counterContainer = event.target.closest('._buttons').querySelector('._counter');
+			counterId = Number(counterContainer.dataset.idCounter);
 			counterContainer.innerText = this.state.items[`${counterId}`].count;
 			allCounterContainer.innerText = String(`${this.state.count} товаров`);
 			sumContainer.innerText = String(this.state.sum).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') + " ₽";
