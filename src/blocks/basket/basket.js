@@ -176,7 +176,15 @@ o2.basket ={
 		sum: 0,
 		count: 0,
 		itemsLength: 0,
-		items: {
+		items: [
+			// {
+			// id: dasd
+			// 	price: 0,
+			// 	count: 0,
+			// 	img: null,
+			// 	name: null,
+			// 	brand: null,
+			// },
 			// 1: {
 			// 	price: 0,
 			// 	count: 0
@@ -189,18 +197,19 @@ o2.basket ={
 			// 	price: 0,
 			// 	count: 0
 			// },
-		},
+		],
 	},
 
 	init() {
 		console.log('init basket')
-		if (this.collectFirst === true) {
-			this.collectData();
-		}
-		this.collectFirst = false;
+		// if (this.collectFirst === true) {
+		// 	this.collectData();
+		// }
+		// this.collectFirst = false;
 
 		this.countInit();
-
+		this.DOMToState();
+		console.log(this.state)
 		this.render();
 	},
 
@@ -208,6 +217,8 @@ o2.basket ={
 		this.isCount(instance, size, sign);
 
 		this.render(instance);
+
+		console.log(this.state)
 	},
 
 	collectData() {
@@ -275,7 +286,7 @@ o2.basket ={
 			this.state.items[`${idCounter}`].count += size;
 			this.state.count += size;
 			this.state.sum += this.state.items[`${idCounter}`].price;
-		} else if (this.state.items[`${idCounter}`].count > 1) {
+		} else if (this.state.items[`${idCounter}`].count > -1) {
 			this.state.items[`${idCounter}`].count -= size;
 			this.state.count -= size;
 			this.state.sum -= this.state.items[`${idCounter}`].price;
@@ -299,6 +310,32 @@ o2.basket ={
 			sumContainer.innerText = String(this.state.sum).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') + " ₽";
 		}
 		this.renderFirst = false;
+
+		if (this.state.items[`${counterId}`].count < 1){
+			event.target.closest('._basket-item').remove();
+		}
+	},
+
+	DOMToState() {
+		this.itemsAll = document.querySelectorAll('._basket-item');
+		for (let item of this.itemsAll) {
+			const price = this.readDOMValue(item, "._price");
+			const count = this.readDOMValue(item, "._counter");
+
+			const product = {
+				price: price,
+				count: count
+			}
+
+			this.state.items.push(product);
+		}
+	},
+
+	readDOMValue(nodeElement, cssClass) {
+		const field = nodeElement.querySelector(cssClass);
+		let fieldValue = field.textContent;
+		fieldValue = parseInt(fieldValue.replace(/ /g,''), 10);
+		return fieldValue;
 	},
 }
 
@@ -311,13 +348,14 @@ o2.basket.init();
 
 
 
-
-
-
-
-
-
-
-
+// createIdObjects() {
+// 	console.log('createIdObjects');
+// 	for (let id = 0; id < this.state.itemsLength; id++) {
+// 		this.state.items.push({
+// 			id: `${id}`,
+// 		});
+// 	}
+// 	console.log(this.state)
+// },
 
 
