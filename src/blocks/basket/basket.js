@@ -199,7 +199,9 @@ o2.basket ={
 		}
 		this.collectFirst = false;
 
-		// this.isCount(size, sign);
+		this.isCount(instance, size, sign);
+
+		this.render(instance);
 	},
 
 	checkAmount(instance) {
@@ -251,37 +253,36 @@ o2.basket ={
 	},
 
 
-	isCount(size, sign) {
+	isCount(instance, size, sign) {
+		console.log('isCount');
+		const counter = instance.closest('._buttons').querySelector('._counter');
+		let idCounter = Number(counter.dataset.idCounter);
+
 		if (sign === true) {
-			this.incrementCounter(count, size, counter);
-			this.incrementSum(price);
-		} else if (count > 0) {
-			this.decrementCounter(count, size, counter);
-			this.decrementSum(price);
+			this.state.items[`${idCounter}`].count += size;
+			this.state.count += size;
+			this.state.sum += this.state.items[`${idCounter}`].price;
+		} else if (this.state.items[`${idCounter}`].count > 0) {
+			this.state.items[`${idCounter}`].count -= size;
+			this.state.count -= size;
+			this.state.sum -= this.state.items[`${idCounter}`].price;
 		}
+
+		console.log(this.state.items[`${idCounter}`].count);
+		console.log("state count", this.state.count)
+		console.log("state sum", this.state.sum)
 	},
 
-	incrementCounter(count, size, counter) {
-		count += size;
-		this.state.count += size;
-		this.render(count, counter, this.state.count);
-	},
+	render(instance) {
+		console.log('render');
+		console.log(instance.closest('._buttons').querySelector('._counter'))
+		const counterContainer = instance.closest('._buttons').querySelector('._counter');
+		let counterId = Number(countContainer.dataset.idCounter);
+		const sumContainer = document.querySelector('._sum');
+		const allCountContainer = document.querySelector('._counters');
 
-	decrementCounter(count, size, counter) {
-		count -= size;
-		this.state.count -= size;
-		this.render(count, counter, this.state.count);
-	},
-
-	incrementSum(price) {
-		this.state.sum += price;
-		this.render( null, null, null, this.state.sum);
-	},
-
-	decrementSum(price) {
-		this.state.sum -= price;
-		this.render( null, null, null, this.state.sum);
-	},
+		countContainer.textContent = this.state.items[`${counterId}`].count;
+	}
 }
 
 
