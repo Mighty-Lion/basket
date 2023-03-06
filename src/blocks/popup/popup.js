@@ -4,6 +4,7 @@ o2.popup = {
 		const body = document.querySelector('body');
 		let contentHtml = document.querySelector(`.${contentClass}`).innerHTML;
 		overlay.innerHTML = contentHtml;
+		document.querySelector(`.${contentClass}`).remove(); // for basket
 		overlay.classList.add('_open');
 		body.style.overflow = 'hidden';
 	},

@@ -168,9 +168,9 @@
 
 
 o2.basket ={
-	sumContainer: false,
-	countContainer: false,
 	collectFirst: true,
+	countFirst: true,
+	renderFirst: true,
 	itemsAll: null,
 	state:{
 		sum: 0,
@@ -192,24 +192,39 @@ o2.basket ={
 		},
 	},
 
-
-	onButton(instance, size, sign) {
+	init() {
+		console.log('init basket')
 		if (this.collectFirst === true) {
-			this.collectData(instance);
+			this.collectData();
 		}
 		this.collectFirst = false;
 
+		this.countInit();
+		// console.log(this.state)
+		// 
+		this.render(null);
+	},
+
+	onButton(instance, size, sign) {
 		this.isCount(instance, size, sign);
 
 		this.render(instance);
 	},
 
-	checkAmount(instance) {
+	collectData() {
+		this.checkAmount();
+		this.createIdObjects();
+		this.createCountersValue();
+		this.createPricesValue();
+		console.log('collectData')
+		// console.log(this.state.items);
+	},
+
+	checkAmount() {
 		console.log('checkAmount')
-		if (this.collectFirst === true) {
-			this.itemsAll = instance.closest('._basket-list').querySelectorAll('._basket-item');
-			this.itemsAll.forEach( () => ++this.state.itemsLength);
-		}
+		this.itemsAll = document.querySelectorAll('._basket-item');
+		this.itemsAll.forEach( () => ++this.state.itemsLength );
+		// console.log(this.state.itemsLength);
 	},
 
 	createIdObjects() {
@@ -243,15 +258,14 @@ o2.basket ={
 		});
 	},
 
-	collectData(instance) {
-		this.checkAmount(instance);
-		this.createIdObjects();
-		this.createCountersValue();
-		this.createPricesValue();
-		console.log('collectData')
-		console.log(this.state.items);
+	countInit() {
+		console.log('countInit');
+		for (let id = 0; id < this.state.itemsLength ; id++) {
+			this.state.count += this.state.items[`${id}`].count;
+			this.state.sum += this.state.items[`${id}`].count * this.state.items[`${id}`].price;
+		}
+		console.log(this.state.count);
 	},
-
 
 	isCount(instance, size, sign) {
 		console.log('isCount');
@@ -262,39 +276,34 @@ o2.basket ={
 			this.state.items[`${idCounter}`].count += size;
 			this.state.count += size;
 			this.state.sum += this.state.items[`${idCounter}`].price;
-		} else if (this.state.items[`${idCounter}`].count > 0) {
+		} else if (this.state.items[`${idCounter}`].count > 1) {
 			this.state.items[`${idCounter}`].count -= size;
 			this.state.count -= size;
 			this.state.sum -= this.state.items[`${idCounter}`].price;
 		}
-
-		console.log(this.state.items[`${idCounter}`].count);
-		console.log("state count", this.state.count)
-		console.log("state sum", this.state.sum)
 	},
 
-	render(instance) {
+	render(instance=null) {
 		console.log('render');
-		console.log(instance.closest('._buttons').querySelector('._counter'))
-		const counterContainer = instance.closest('._buttons').querySelector('._counter');
-		let counterId = Number(countContainer.dataset.idCounter);
+		const allCounterContainer = document.querySelector('._counters');
 		const sumContainer = document.querySelector('._sum');
-		const allCountContainer = document.querySelector('._counters');
 
-		countContainer.textContent = this.state.items[`${counterId}`].count;
-	}
+		if (this.renderFirst === true) {
+			allCounterContainer.innerText = String(`${this.state.count} товаров`);
+			sumContainer.innerText = String(this.state.sum).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') + " ₽";
+		} else {
+			const counterContainer = instance.closest('._buttons').querySelector('._counter');
+			let counterId = Number(counterContainer.dataset.idCounter);
+			counterContainer.innerText = this.state.items[`${counterId}`].count;
+			allCounterContainer.innerText = String(`${this.state.count} товаров`);
+			sumContainer.innerText = String(this.state.sum).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') + " ₽";
+		}
+		this.renderFirst = false;
+	},
 }
 
 
-
-
-
-
-
-
-
-
-
+o2.basket.init();
 
 
 
