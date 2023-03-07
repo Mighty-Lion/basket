@@ -166,7 +166,6 @@
 // }
 
 
-
 o2.basket ={
 	collectFirst: true,
 	countFirst: true,
@@ -175,7 +174,6 @@ o2.basket ={
 	state:{
 		sum: 0,
 		count: 0,
-		itemsLength: 0,
 		items: [
 			// {
 			// id: dasd
@@ -197,99 +195,76 @@ o2.basket ={
 			// 	price: 0,
 			// 	count: 0
 			// },
-		],
+			],
 	},
 
 	init() {
 		console.log('init basket')
-		// if (this.collectFirst === true) {
-		// 	this.collectData();
-		// }
-		// this.collectFirst = false;
-
+		this.collectData();
 		this.countInit();
-		this.DOMToState();
-		console.log(this.state)
 		this.render();
 	},
 
-	onButton(instance, size, sign) {
-		this.isCount(instance, size, sign);
-
+	onButton(instance, size) {
+		this.isCount(instance, size);
 		this.render(instance);
+		// this.deleteElementOfArray();
+		console.table(this.state)
+	},
 
-		console.log(this.state)
+	createBasket(){
+		const contant = document.querySelector("._overlay");
+
 	},
 
 	collectData() {
-		this.checkAmount();
-		this.createIdObjects();
-		this.createCountersValue();
-		this.createPricesValue();
-		console.log('collectData')
-		// console.log(this.state.items);
-	},
-
-	checkAmount() {
-		console.log('checkAmount')
 		this.itemsAll = document.querySelectorAll('._basket-item');
-		this.itemsAll.forEach( () => ++this.state.itemsLength );
-		// console.log(this.state.itemsLength);
-	},
+		for (let item of this.itemsAll) {
+			const price = this.readDOMValue(item, "._price");
+			const count = this.readDOMValue(item, "._counter");
 
-	createIdObjects() {
-		console.log('createIdObjects');
-		for (let id = 0; id < this.state.itemsLength; id++) {
-			this.state.items[`${id}`] = {};
+			const product = {
+				price: price,
+				count: count
+			}
+
+			this.state.items.push(product);
 		}
 	},
 
-	createCountersValue(){
-		console.log('createCountersValue');
-		let id = 0;
-		this.itemsAll.forEach( (element) => {
-			const counter = element.querySelector('._counter');
-			let counterContent = counter.textContent;
-			let count = Number(counterContent);
-			this.state.items[`${id}`].count = count ;
-			++id;
-		});
-	},
-
-	createPricesValue(){
-		console.log('createPricesValue');
-		let id = 0;
-		this.itemsAll.forEach( (element) => {
-			const priceSelect = element.querySelector('._price');
-			let priceContent = priceSelect.textContent;
-			let price = parseInt(priceContent.replace(/ /g,''), 10);
-			this.state.items[`${id}`].price = price ;
-			++id;
-		});
+	readDOMValue(nodeElement, cssClass) {
+		const field = nodeElement.querySelector(cssClass);
+		let fieldValue = field.textContent;
+		fieldValue = parseInt(fieldValue.replace(/ /g,''), 10);
+		return fieldValue;
 	},
 
 	countInit() {
 		console.log('countInit');
-		for (let id = 0; id < this.state.itemsLength ; id++) {
+		console.log(this.state.items.length)
+		for (let id = 0; id < this.state.items.length ; id++) {
 			this.state.count += this.state.items[`${id}`].count;
 			this.state.sum += this.state.items[`${id}`].count * this.state.items[`${id}`].price;
 		}
 		console.log(this.state.count);
 	},
 
-	isCount(instance, size, sign) {
+	isCount(instance, size) {
 		console.log('isCount');
-		const counter = instance.closest('._buttons').querySelector('._counter');
-		let idCounter = Number(counter.dataset.idCounter);
+		console.table(this.state);
+		let sign = size[0];
+		size = Number(size.substring(1));
+		const item = instance.closest('._basket-item');
+		let idItem = Number(item.dataset.idItem);
 
-		if (sign === true) {
-			this.state.items[`${idCounter}`].count += size;
+		if (sign === "+") {
+			this.state.items[`${idItem}`].count += size;
 			this.state.count += size;
-			this.state.sum += this.state.items[`${idCounter}`].price;
-		} else if (this.state.items[`${idCounter}`].count > -1) {
-			this.state.items[`${idCounter}`].count -= size;
+			this.state.sum += this.state.items[`${idItem}`].price;
+		} else if (this.state.items[`${idItem}`].count > -1) {
+			this.state.items[`${idItem}`].count -= size;
 			this.state.count -= size;
-			this.state.sum -= this.state.items[`${idCounter}`].price;
+			this.state.sum -= this.state.items[`${idItem}`].price;
 		}
 	},
 
@@ -316,46 +291,13 @@ o2.basket ={
 		}
 	},
 
-	DOMToState() {
-		this.itemsAll = document.querySelectorAll('._basket-item');
-		for (let item of this.itemsAll) {
-			const price = this.readDOMValue(item, "._price");
-			const count = this.readDOMValue(item, "._counter");
-
-			const product = {
-				price: price,
-				count: count
-			}
-
-			this.state.items.push(product);
-		}
-	},
-
-	readDOMValue(nodeElement, cssClass) {
-		const field = nodeElement.querySelector(cssClass);
-		let fieldValue = field.textContent;
-		fieldValue = parseInt(fieldValue.replace(/ /g,''), 10);
-		return fieldValue;
-	},
+	// deleteElementOfArray(){
+	// 	const index = this.state.items.findIndex(item => item.count === 0);
+	// 	this.state.items.splice(index, 1);
+	// },
 }
 
 
 o2.basket.init();
-
-
-
-
-
-
-
-// createIdObjects() {
-// 	console.log('createIdObjects');
-// 	for (let id = 0; id < this.state.itemsLength; id++) {
-// 		this.state.items.push({
-// 			id: `${id}`,
-// 		});
-// 	}
-// 	console.log(this.state)
-// },
 
 
