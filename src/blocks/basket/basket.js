@@ -173,32 +173,36 @@ o2.basket ={
 	itemsAll: null,
 	state:{
 		sum: 0,
+		count: 0,
 		items: [
 			{
-				id: 0,
+				id: 1,
 				price: 2000,
 				count: 1,
-				img: null,
-				name: null,
-				brand: null,
+				webp: "./img/logo.webp",
+				jpg: "./img/logo.jpg",
+				name: "Rose Hair & Scalp Moisturising Masque",
+				brand: "Aesop",
 			},
 
 			{
-				id: 1,
+				id: 2,
 				price: 500,
 				count: 2,
-				img: null,
-				name: null,
-				brand: null,
+				webp: "./img/image.webp",
+				jpg: "./img/image.jpg",
+				name: "Citrues Melange Body Cleanser",
+				brand: "Aesop",
 			},
 
 			{
-				id: "ХУЙ",
+				id: 3,
 				price: 1,
 				count: 3,
-				img: null,
-				name: null,
-				brand: null,
+				webp: "./img/image.webp",
+				jpg: "./img/image.jpg",
+				name: "Shine Hair & Beard Oil",
+				brand: "Aesop",
 			},
 		],
 	},
@@ -206,13 +210,67 @@ o2.basket ={
 	init() {
 		console.log('init basket')
 
-		this.renderItems();
+		this.calculate();
+		this.render();
+	},
 
+	onClick(instance, change) {
+		this.count(instance, change);
+		this.calculate();
+		this.render();
+		this.cleanArray();
+		console.log(this.state.items)
+	},
+
+	calculate() {
 		this.calculateSum();
-		this.renderSum();
+		this.calculateCounters();
+	},
 
-		// this.countInit();
-		// this.render();
+	render() {
+		this.renderSum();
+		this.renderCounters();
+		this.renderItems();
+	},
+
+	cleanArray() {
+		let originalArray = this.state.items;
+		let filteredArray = this.filterArray(originalArray);
+		this.state.items = filteredArray;
+	},
+
+	filterArray(originalArray) {
+		console.log('filterArray();')
+		let filteredArray = originalArray.filter(item => item.count > 0);
+		return filteredArray;
+	},
+
+	count(instance, change) {
+		const card = instance.closest("._basket-item");
+		const cardId = Number(card.dataset.idItem);
+		let sign = change[0];
+		size = Number(change.substring(1));
+		// console.log({sign, size})
+
+		const targetItem = this.state.items.find((item) => (item.id === cardId));
+		if (sign === "+") {
+			++targetItem.count;
+		} else if (targetItem.count > 0){
+			--targetItem.count;
+		}
+
+	},
+
+	renderItems() {
+		console.log('innerList')
+		const itemsList = document.querySelector("._basket-list");
+		itemsList.innerHTML = "";
+
+		for (let item of this.state.items) {
+			if (item.count > 0) {
+				itemsList.innerHTML += this.createItem(item);
+			}
+		}
 	},
 
 	calculateSum() {
@@ -225,50 +283,36 @@ o2.basket ={
 		this.state.sum = sum;
 	},
 
-	onClick(instance, change) {
-		const card = instance.closest("._basket-item");
-		const cardId = card.dataset.idItem;
-
-		const targetItem = this.state.items.find(item => item.id == cardId);
-		targetItem.count++;
-
-		this.calculateSum();
-
-		this.renderSum();
-		this.renderItems();
-		// this.isCount(instance, size);
-		// this.render(instance);
-		// this.deleteElementOfArray();
-		// console.table(this.state)
-		// console.log(this.state.items);
-	},
-
-	renderItems(){
-		console.log('innerList')
-		const itemsList = document.querySelector("._basket-list");
-		itemsList.innerHTML = "";
-
-		for (let item of this.state.items) {
-			itemsList.innerHTML += this.createItem(item);
-
-		}
-	},
-
 	renderSum() {
 		const sumContainer = document.querySelector('._sum');
-		sumContainer.innerText = this.state.sum;
+		sumContainer.innerText = this.formatPrice(this.state.sum);
+	},
+
+	calculateCounters() {
+		let count = 0;
+
+		for (item of this.state.items) {
+			count += item.count ;
+		}
+
+		this.state.count = count;
+	},
+
+	renderCounters() {
+		const countContainer = document.querySelector('._counters');
+		countContainer.innerText = String(`${this.state.count} товаров`);
 	},
 
 	createItem(item){
 		console.log('createItems')
 		itemHtml = `<div class="basket__item _basket-item" data-id-item="${item.id}">
 						<picture>
-							<source srcset="./img/image.webp" type="image/webp">
-							<img class="basket__img" src="./img/image.jpg" alt="image name">
+							<source srcset="${item.webp}" type="image/webp">
+							<img class="basket__img" src="${item.jpg}" alt="image name">
 						</picture>
 						<div class="basket__text">
-							<div class="basket__text-title">Aesop</div>
-							<div class="basket__text-name">Rose Hair & Scalp Moisturising Masque</div>
+							<div class="basket__text-title">${item.brand}</div>
+							<div class="basket__text-name">${item.name}</div>
 							<div class="basket__text-price _price">${this.formatPrice(item.price)}</div>
 						</div>
 						<div class="basket__buttons _buttons">
@@ -287,94 +331,12 @@ o2.basket ={
 							</button>
 						</div>
 					</div>`;
-		// console.log({itemHtml})
-		return itemHtml
+		return itemHtml;
 	},
 
 	formatPrice(num) {
 		return String(num).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') + " ₽";
 	},
-
-	// collectData() {
-	// 	this.itemsAll = document.querySelectorAll('._basket-item');
-	// 	for (let item of this.itemsAll) {
-	// 		const price = this.readDOMValue(item, "._price");
-	// 		const count = this.readDOMValue(item, "._counter");
-
-	// 		const product = {
-	// 			price: price,
-	// 			count: count
-	// 		}
-
-	// 		this.state.items.push(product);
-	// 	}
-	// },
-
-	// readDOMValue(nodeElement, cssClass) {
-	// 	const field = nodeElement.querySelector(cssClass);
-	// 	let fieldValue = field.textContent;
-	// 	fieldValue = parseInt(fieldValue.replace(/ /g,''), 10);
-	// 	return fieldValue;
-	// },
-
-	// countInit() {
-		// console.log('countInit');
-		// console.log(this.state.items.length)
-		// for (let id = 0; id < this.state.items.length ; id++) {
-		// 	this.state.count += this.state.items[`${id}`].count;
-		// 	this.state.sum += this.state.items[`${id}`].count * this.state.items[`${id}`].price;
-		// }
-		// console.log(this.state.count);
-	// },
-
-	// isCount(instance, size) {
-	// 	console.log('isCount');
-	// 	console.table(this.state);
-	// 	let sign = size[0];
-	// 	size = Number(size.substring(1));
-	// 	const item = instance.closest('._basket-item');
-	// 	let idItem = Number(item.dataset.idItem);
-
-	// 	const activeItem = this.state.items.find(item => item.id === idItem);
-
-	// 	if (sign === "+") {
-	// 		this.state.items[`${idItem}`].count += size;
-	// 		this.state.count += size;
-	// 		this.state.sum += activeItem;
-	// 	} else if (this.state.items[`${idItem}`].count > -1) {
-	// 		this.state.items[`${idItem}`].count -= size;
-	// 		this.state.count -= size;
-	// 		this.state.sum -= activeItem;
-	// 	}
-	// },
-
-	// render() {
-	// 	console.log('render');
-	// 	const allCounterContainer = document.querySelector('._counters');
-	// 	const sumContainer = document.querySelector('._sum');
-	// 	let counterContainer = null;
-	// 	let counterId = 0;
-	// 	if (this.renderFirst === true) {
-	// 		allCounterContainer.innerText = String(`${this.state.count} товаров`);
-	// 		sumContainer.innerText = String(this.state.sum).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') + " ₽";
-	// 	} else {
-	// 		counterContainer = event.target.closest('._buttons').querySelector('._counter');
-	// 		counterId = Number(counterContainer.dataset.idCounter);
-	// 		counterContainer.innerText = this.state.items[`${counterId}`].count;
-	// 		allCounterContainer.innerText = String(`${this.state.count} товаров`);
-	// 		sumContainer.innerText = String(this.state.sum).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') + " ₽";
-	// 	}
-	// 	this.renderFirst = false;
-
-	// 	if (this.state.items[`${counterId}`].count < 1){
-	// 		event.target.closest('._basket-item').remove();
-	// 	}
-	// },
-
-	// deleteElementOfArray(){
-	// 	const index = this.state.items.findIndex(item => item.count === 0);
-	// 	this.state.items.splice(index, 1);
-	// },
 }
 
 

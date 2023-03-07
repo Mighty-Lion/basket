@@ -24,7 +24,6 @@
 }
 .basket__header
 {
-	// margin: 0 0 24px 0;
 	margin: 0;
 	font-family: 'Gilroy';
 	font-style: normal;
@@ -51,8 +50,6 @@
 	max-height: 96px;
 	background: #F2F2F2;
 	border-radius: 8px;
-
-	// &:not(:last-of-type){ margin: 0 0 8px 0;}
 }
 .basket__img
 {
@@ -130,11 +127,7 @@
 
 .basket__footer
 {
-	// display: grid;
-	// grid-template-columns: 1fr auto;
-	// grid-column-gap: 5px;
-	// grid-template-columns: minmax(0, 227px) auto;
-	// align-items: end;
+
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
@@ -144,7 +137,6 @@
 {
 	display: grid;
 	grid-template-rows: auto auto;
-/*	align-content: end;*/
 }
 .basket__price
 {
@@ -152,10 +144,8 @@
 	font-family: 'Gilroy';
 	font-style: normal;
 	font-weight: 600;
-	// font-size: 2rem;
-	// font-size: calc(1rem + .6vw);
 	font-size: 28px;
-	line-height: 26px;
+	line-height: 30px;
 	letter-spacing: 0.3px;
 	color: #131313;
 	white-space: nowrap;
