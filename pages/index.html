@@ -24,10 +24,35 @@
 		</header>
 		<div class="container">
 			<a class="button" onclick="o2.popup.open('_popup-content')">Button</a>
+			<picture>
+				<source srcset="./svg/busketMinus.svg" type="svg/webp">
+				<img class="basket__img" src=".//svg/busketMinus.svg" alt="image name">
+			</picture>
 
 			<div class="popup _overlay"></div>
 			<div class="popup__content _popup-content">
+				<div class="basket">
+					<div class="basket__close" onclick="o2.popup.close()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<rect y="-6.10352e-05" width="24" height="24" rx="12" fill="#3F4043" />
+							<path d="M8.18339 16.5831L7.41699 15.8167L11.217 11.9999L7.41699 8.18315L8.18339 7.41675L12.0002 11.2167L15.817 7.41675L16.5834 8.18315L12.7834 11.9999L16.5834 15.8167L15.817 16.5831L12.0002 12.7831L8.18339 16.5831Z" fill="#ECECEC" />
+						</svg>
+					</div>
+					<h2 class="basket__header">Корзина</h2>
+					<ul class="basket__list _basket-list">
 
+
+
+					</ul>
+
+
+					<div class="basket__footer">
+						<div class="basket__footer-text">
+							<span class="basket__price _sum">0 ₽</span>
+							<span class="basket__counter _counters">0 товаров<span>
+						</div>
+						<button class="basket__footer-button">Оформить заказ</button>
+					</div>
+				</div>
 			</div>
 		</div>
 

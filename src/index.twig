@@ -3,6 +3,10 @@
 {% block page %}
 <div class="container">
 	<a class="button" onclick="o2.popup.open('_popup-content')">Button</a>
+	<picture>
+				<source srcset="./svg/busketMinus.svg" type="svg/webp">
+				<img class="basket__img" src=".//svg/busketMinus.svg" alt="image name">
+			</picture>
 
 	{% include '/blocks/popup/popup.twig' %}
 	{% include '/blocks/basket/basket.twig' %}
