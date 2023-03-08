@@ -167,10 +167,6 @@
 
 
 o2.basket ={
-	collectFirst: true,
-	countFirst: true,
-	renderFirst: true,
-	itemsAll: null,
 	state:{
 		sum: 0,
 		count: 0,
@@ -208,7 +204,7 @@ o2.basket ={
 	},
 
 	init() {
-		console.log('init basket')
+		// console.log('init basket')
 
 		this.calculate();
 		this.render();
@@ -234,22 +230,13 @@ o2.basket ={
 	},
 
 	cleanArray() {
-		// const target = this.state.items.find((item) => (item.count <= 1));
-		for (let item of this.state.items) {
-			if (item.count < 1) {
-				this.state.items.splice(item, 1)
+			for (let item of this.state.items) {
+				if (item.count < 1) {
+					this.state.items.splice(item, 1);
+				}
 			}
-		}
-		// this.state.items.splice(target, 1);
-		console.table(this.state.items)
-
+		// console.table(this.state.items);
 	},
-
-	// filterArray(originalArray) {
-	// 	console.log('filterArray();')
-	// 	let filteredArray = originalArray.filter(item => item.count > 0);
-	// 	return filteredArray;
-	// },
 
 	count(instance, change) {
 		const card = instance.closest("._basket-item");
@@ -268,7 +255,7 @@ o2.basket ={
 	},
 
 	renderItems() {
-		console.log('innerList')
+		// console.log('innerList')
 		const itemsList = document.querySelector("._basket-list");
 		itemsList.innerHTML = "";
 
