@@ -78,7 +78,6 @@ o2.basket ={
 		} else if (targetItem.count > 0){
 			--targetItem.count;
 		}
-
 	},
 
 	renderItems() {
@@ -142,10 +141,10 @@ o2.basket ={
 							</button>
 							<div class="basket__button basket__button--color-inversion _counter">${item.count}</div>
 							<button class="basket__button" onclick="o2.basket.onClick(this, '+1')">
-									<picture>
-										<source srcset="./svg/busketPlus.svg" type="svg/webp">
-										<img class="basket__img" src="./svg/busketPlus.svg" alt="image name">
-									</picture>
+								<picture>
+									<source srcset="./svg/busketPlus.svg" type="svg/webp">
+									<img class="basket__img" src="./svg/busketPlus.svg" alt="image name">
+								</picture>
 							</button>
 						</div>
 					</div>`;
