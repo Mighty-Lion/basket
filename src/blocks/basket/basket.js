@@ -219,7 +219,7 @@ o2.basket ={
 		this.calculate();
 		this.render();
 		this.cleanArray();
-		console.log(this.state.items)
+		// console.log(this.state.items)
 	},
 
 	calculate() {
@@ -234,16 +234,22 @@ o2.basket ={
 	},
 
 	cleanArray() {
-		let originalArray = this.state.items;
-		let filteredArray = this.filterArray(originalArray);
-		this.state.items = filteredArray;
+		// const target = this.state.items.find((item) => (item.count <= 1));
+		for (let item of this.state.items) {
+			if (item.count < 1) {
+				this.state.items.splice(item, 1)
+			}
+		}
+		// this.state.items.splice(target, 1);
+		console.table(this.state.items)
+
 	},
 
-	filterArray(originalArray) {
-		console.log('filterArray();')
-		let filteredArray = originalArray.filter(item => item.count > 0);
-		return filteredArray;
-	},
+	// filterArray(originalArray) {
+	// 	console.log('filterArray();')
+	// 	let filteredArray = originalArray.filter(item => item.count > 0);
+	// 	return filteredArray;
+	// },
 
 	count(instance, change) {
 		const card = instance.closest("._basket-item");
