@@ -1,172 +1,5 @@
-// o2.basket = {
-// 	sumContainer: false,
-// 	countContainer: false,
-
-// 	state:{
-// 		sum: 0,
-// 		count: 0,
-// 		items: {
-// 			1111: {
-// 				sum: 0,
-// 				count: 0
-// 			}
-// 		},
-// 	},
-
-// 	plus() {
-// 		const counter = event.target.closest('._buttons').querySelector('._counter');
-// 		let counterContent = event.target.closest('._buttons').querySelector('._counter').textContent;
-// 		let count = Number(counterContent) + 1;
-// 		counter.innerText = count;
-// 		this.counters();
-
-// 		let price = event.target.closest('.basket__item').querySelector('._price').textContent;
-// 		let unitPrice = parseInt(price.replace(/ /g,''), 10);
-// 		this.sum(true, unitPrice);
-// 	},
-
-// 	// minus(instance) {
-// 	minus() {
-// 		const counter = event.target.closest('._buttons').querySelector('._counter');
-// 		let counterContent = event.target.closest('._buttons').querySelector('._counter').textContent;
-// 		let count = Number(counterContent) - 1;
-
-// 		let price = null;
-// 		let unitPrice = null;
-// 		let priceInt = 0;
-
-// 		if (count !== -1){
-// 			counter.innerText = count;
-// 			price = event.target.closest('.basket__item').querySelector('._price').textContent;
-// 			unitPrice = parseInt(price.replace(/ /g,''), 10);
-// 		}
-
-// 		this.counters();
-
-// 		this.sum(false, unitPrice);
-// 	},
-
-// 	counters() {
-// 		const counters = document.querySelector('._counters');
-// 		const counterAll = document.querySelectorAll('._counter');
-// 		let num = 0;
-// 		counterAll.forEach( function(element) {
-// 			num += Number(element.textContent);
-// 		});
-
-// 		counters.textContent = String(num) + " товаров";
-// 	},
-
-// 	sum(signBool, unitPrice) {
-// 		const sumObj = document.querySelector('._sum');
-// 		let sumInt = 0;
-// 		if (signBool === true){
-// 			sumInt = parseInt(sumObj.textContent.replace(/ /g,''), 10) + unitPrice;
-// 		} else {
-// 			sumInt = parseInt(sumObj.textContent.replace(/ /g,''), 10) - unitPrice;
-// 		}
-// 		sumObj.textContent = String(sumInt).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') + " ₽";
-// 	},
-// 	// render(){
-// 	// 	asdas
-// 	// }
-
-
-
-
-// 	change(id, num)
-// 	{
-// 		//
-// 	}
-// }
-// 
-// 
-// 
-
-
-
-// o2.basket ={
-// 	sumContainer: false,
-// 	countContainer: false,
-// 	state:{
-// 		sum: 0,
-// 		count: 0,
-// 		items: {
-// 			1111: {
-// 				sum: 0,
-// 				count: 0
-// 			}
-// 		},
-// 	},
-
-
-// 	onButton(instance, size, sign) {
-// 		this.collectData(instance, size, sign);
-// 	},
-
-// 	collectData(instance, size, sign) {
-// 		const buttons = instance.closest('._buttons');
-// 		const counter = buttons.querySelector('._counter');
-// 		let counterContent = counter.textContent;
-// 		let count = Number(counterContent);
-
-// 		let priceSelector = instance.closest('._basket-item').querySelector('._price');
-// 		let priceStr = priceSelector.textContent;
-// 		let price = parseInt(priceStr.replace(/ /g,''), 10);
-
-// 		this.checkSign(sign, instance, size, count, price, counter);
-// 	},
-
-// 	checkSign(sign, instance, size, count, price, counter) {
-// 		if (sign === true) {
-// 			this.incrementCounter(count, size, counter);
-// 			this.incrementSum(price);
-// 		} else if (count > 0) {
-// 			this.decrementCounter(count, size, counter);
-// 			this.decrementSum(price);
-// 		}
-// 	},
-
-// 	incrementCounter(count, size, counter) {
-// 		count += size;
-// 		this.state.count += size;
-// 		this.render(count, counter, this.state.count);
-// 	},
-
-// 	decrementCounter(count, size, counter) {
-// 		count -= size;
-// 		this.state.count -= size;
-// 		this.render(count, counter, this.state.count);
-// 	},
-
-// 	incrementSum(price) {
-// 		this.state.sum += price;
-// 		this.render( null, null, null, this.state.sum);
-// 	},
-
-// 	decrementSum(price) {
-// 		this.state.sum -= price;
-// 		this.render( null, null, null, this.state.sum);
-// 	},
-
-// 	render(count=null, counter=null, stateCount=null, sumInt=null) {
-// 		const sumContainer = document.querySelector('._sum');
-// 		const countContainer = document.querySelector('._counters');
-// 		if(counter !== null) {
-// 			counter.innerText = count;
-// 		}
-// 		if (stateCount !== null) {
-// 			countContainer.textContent = String(stateCount) + " товаров";
-// 		}
-// 		if (sumInt !==null) {
-// 			let sum = String(sumInt).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') + " ₽";
-// 			sumContainer.textContent = sum;
-// 		}
-// 	},
-// }
-
-
 o2.basket ={
+	closeSvg: "{% include '/assets/svg/close.svg' %}",
 	state:{
 		sum: 0,
 		count: 0,
@@ -175,7 +8,7 @@ o2.basket ={
 				id: 1,
 				price: 2000,
 				count: 1,
-				webp: "./img/logo.webp",
+				webp: "./img/image.webp",
 				jpg: "./img/logo.jpg",
 				name: "Rose Hair & Scalp Moisturising Masque",
 				brand: "Aesop",
@@ -204,8 +37,6 @@ o2.basket ={
 	},
 
 	init() {
-		// console.log('init basket')
-
 		this.calculate();
 		this.render();
 	},
@@ -215,7 +46,66 @@ o2.basket ={
 		this.calculate();
 		this.render();
 		this.cleanArray();
-		// console.log(this.state.items)
+	},
+
+	open(contentClass) {
+		console.log('open')
+		const overlay = document.querySelector('._overlay');
+		const body = document.querySelector('body');
+		let contentHtml = this.createBasket();
+		overlay.innerHTML = contentHtml;
+		overlay.classList.add('_open');
+		body.style.overflow = 'hidden';
+		this.init();
+	},
+
+	close() {
+		const overlay = document.querySelector('._overlay');
+		const body = document.querySelector('body');
+		body.style.overflow = 'visible';
+		overlay.classList.remove('_open');
+	},
+
+	outsideClick(event) {
+		const openClass = document.querySelector('._open');
+		const boolOpen = event.composedPath().includes(openClass);
+
+		if ((boolOpen == true) && (event.target.classList.contains('_open') === true)) {
+			this.close();
+		}
+
+		this.setEscEvent();
+	},
+
+	setEscEvent()
+	{
+		window.onkeydown = () => { (event.key === 'Escape') && (this.close()) };
+	},
+
+	createBasket() {
+		console.log("createBasket")
+		basketHtml =
+				`
+					<div class="basket">
+						<div class="basket__close" onclick="o2.basket.close()">
+							<picture>
+								<source srcset="./svg/close.svg" type="svg/webp">
+								<img class="basket__img" src="./svg/close.svg" alt="image name">
+							</picture>
+						</div>
+						<h2 class="basket__header">Корзина</h2>
+						<div class="basket__list _basket-list">
+						</div>
+						<div class="basket__footer">
+							<div class="basket__footer-text">
+								<span class="basket__price _sum">0 ₽</span>
+								<span class="basket__counter _counters">0 товаров<span>
+							</div>
+							<button class="basket__footer-button">Оформить заказ</button>
+						</div>
+					</div>
+				`;
+		return basketHtml;
 	},
 
 	calculate() {
@@ -235,7 +125,6 @@ o2.basket ={
 					this.state.items.splice(item, 1);
 				}
 			}
-		// console.table(this.state.items);
 	},
 
 	count(instance, change) {
@@ -243,7 +132,6 @@ o2.basket ={
 		const cardId = Number(card.dataset.idItem);
 		let sign = change[0];
 		size = Number(change.substring(1));
-		// console.log({sign, size})
 
 		const targetItem = this.state.items.find((item) => (item.id === cardId));
 		if (sign === "+") {
@@ -255,7 +143,6 @@ o2.basket ={
 	},
 
 	renderItems() {
-		// console.log('innerList')
 		const itemsList = document.querySelector("._basket-list");
 		itemsList.innerHTML = "";
 
@@ -332,7 +219,4 @@ o2.basket ={
 	},
 }
 
-
-o2.basket.init();
-
-
+window.addEventListener('click', () => o2.basket.outsideClick(event));
