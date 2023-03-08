@@ -59,11 +59,11 @@ o2.basket ={
 	},
 
 	cleanArray() {
-			for (let item of this.state.items) {
-				if (item.count < 1) {
-					this.state.items.splice(item, 1);
-				}
+		for (let item of this.state.items) {
+			if (item.count < 1) {
+				this.state.items.splice(item, 1);
 			}
+		}
 	},
 
 	count(instance, change) {
@@ -110,7 +110,7 @@ o2.basket ={
 	calculateCounters() {
 		let count = 0;
 
-		for (item of this.state.items) {
+		for (let item of this.state.items) {
 			count += item.count ;
 		}
 
@@ -123,7 +123,6 @@ o2.basket ={
 	},
 
 	createItem(item){
-		console.log('createItems')
 		itemHtml = `<div class="basket__item _basket-item" data-id-item="${item.id}">
 						<picture>
 							<source srcset="${item.webp}" type="image/webp">
