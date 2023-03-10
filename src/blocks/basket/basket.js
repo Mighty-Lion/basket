@@ -42,10 +42,10 @@ o2.basket ={
 	},
 
 	onClick(instance, change) {
-		this.count(instance, change);
+		this.changeCount(instance, change);
 		this.calculate();
 		this.render();
-		this.cleanArray();
+		// this.deleteItem();
 	},
 
 	open() {
@@ -118,25 +118,26 @@ o2.basket ={
 		this.renderItems();
 	},
 
-	cleanArray() {
-		for (let item of this.state.items) {
-			if (item.count < 1) {
-				this.state.items.splice(item, 1);
-			}
-		}
+	deleteItem(index) {
+		console.log("DELETE", index);
+		this.state.items.splice(index, 1)
 	},
 
-	count(instance, change) {
+	changeCount(instance, change) {
 		const card = instance.closest("._basket-item");
 		const cardId = Number(card.dataset.idItem);
 		let sign = change[0];
 		size = Number(change.substring(1));
 
-		const targetItem = this.state.items.find((item) => (item.id === cardId));
+		const cardIndex = this.state.items.findIndex((item) => (item.id === cardId));
+
+		const targetItem = this.state.items[cardIndex];
+
 		if (sign === "+") {
 			++targetItem.count;
-		} else if (targetItem.count > 0){
+		} else if (sign === "-") {
 			--targetItem.count;
+			if (targetItem.count < 1) this.deleteItem(cardIndex)
 		}
 	},
 
@@ -145,9 +146,7 @@ o2.basket ={
 		itemsList.innerHTML = "";
 
 		for (let item of this.state.items) {
-			if (item.count > 0) {
-				itemsList.innerHTML += this.createItem(item);
-			}
+			itemsList.innerHTML += this.createItem(item);
 		}
 	},
 
