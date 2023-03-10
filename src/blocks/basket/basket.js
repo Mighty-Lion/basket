@@ -48,8 +48,7 @@ o2.basket ={
 		this.cleanArray();
 	},
 
-	open(contentClass) {
-		console.log('open')
+	open() {
 		const overlay = document.querySelector('._overlay');
 		const body = document.querySelector('body');
 		let contentHtml = this.createBasket();
@@ -83,7 +82,7 @@ o2.basket ={
 	},
 
 	createBasket() {
-		console.log("createBasket")
+		// console.log("createBasket")
 		basketHtml =
 				`
 					<div class="basket">
@@ -120,11 +119,11 @@ o2.basket ={
 	},
 
 	cleanArray() {
-			for (let item of this.state.items) {
-				if (item.count < 1) {
-					this.state.items.splice(item, 1);
-				}
+		for (let item of this.state.items) {
+			if (item.count < 1) {
+				this.state.items.splice(item, 1);
 			}
+		}
 	},
 
 	count(instance, change) {
@@ -183,7 +182,6 @@ o2.basket ={
 	},
 
 	createItem(item){
-		console.log('createItems')
 		itemHtml = `<div class="basket__item _basket-item" data-id-item="${item.id}">
 						<picture>
 							<source srcset="${item.webp}" type="image/webp">
