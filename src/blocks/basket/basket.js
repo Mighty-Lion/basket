@@ -45,7 +45,6 @@ o2.basket ={
 		this.changeCount(instance, change);
 		this.calculate();
 		this.render();
-		// this.deleteItem();
 	},
 
 	open() {
@@ -82,8 +81,7 @@ o2.basket ={
 	},
 
 	createBasket() {
-		// console.log("createBasket")
-		basketHtml =
+		return basketHtml =
 				`
 					<div class="basket">
 						<div class="basket__close" onclick="o2.basket.close()">
@@ -104,7 +102,6 @@ o2.basket ={
 						</div>
 					</div>
 				`;
-		return basketHtml;
 	},
 
 	calculate() {
@@ -119,7 +116,6 @@ o2.basket ={
 	},
 
 	deleteItem(index) {
-		console.log("DELETE", index);
 		this.state.items.splice(index, 1)
 	},
 
