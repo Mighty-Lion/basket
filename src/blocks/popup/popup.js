@@ -4,7 +4,7 @@ o2.popup = {
 		const body = document.querySelector('body');
 		let contentHtml = document.querySelector(`.${contentClass}`).innerHTML;
 		overlay.innerHTML = contentHtml;
-		document.querySelector(`.${contentClass}`).remove(); // for basket
+		// document.querySelector(`.${contentClass}`).remove(); // for basket
 		overlay.classList.add('_open');
 		body.style.overflow = 'hidden';
 	},
@@ -34,3 +34,15 @@ o2.popup = {
 }
 
 window.addEventListener('click', () => o2.popup.outsideClick(event));
+
+overlay
+	content
+		item
+		item
+		item
+		item
+	content.newClass
+		hasDataasd
+		asd
+		asd
+	
