@@ -1,34 +1,75 @@
-<div class="popup__content _popup-content">
-	<div class="basket">
-		<div class="basket__close" onclick="o2.popup.close()">{% include '/assets/svg/close.svg' %}</div>
-			<h2 class="basket__header">Корзина</h2>
-			<div class="basket__list _basket-list">
-				{# <li>
-					<div class="basket__item _basket-item" data-id-item="0">
-						<picture>
-							<source srcset="./img/image.webp" type="image/webp">
-							<img class="basket__img" src="./img/image.jpg" alt="image name">
+<section class="basket _basket-content">
+	<div class="basket__wrapper _basket">
+		<div class="basket__close" onclick="o2.popup.close()">{% include 'assets/svg/close.svg' %}</div>
+		<div class="basket__title">Корзина</div>
+		<ul class="basket__list">
+			<li class="basket__item _basket-item" data-index-item="1">
+				<div class="basket__item-content">
+					<div class="basket__item-img-wrapper">
+						<picture class="basket__item-picture">
+							<source class="_item-source" srcset="img/img1.webp" type="image/webp">
+							<img class="basket__item-img _item-jpg" src="img/img1.jpg" alt="Logo" width="57px">
 						</picture>
-						<div class="basket__text">
-							<div class="basket__text-title">Aesop</div>
-							<div class="basket__text-name">Rose Hair & Scalp Moisturising Masque</div>
-							<div class="basket__text-price _price">5 600 ₽</div>
-						</div>
-						<div class="basket__buttons _buttons">
-							<button class="basket__button" onclick="o2.basket.onButton(this, '-1')">{% include '/assets/svg/busketMinus.svg' %}</button>
-							<div class="basket__button basket__button--color-inversion _counter" data-id-counter="0">1</div>
-							<button class="basket__button" onclick="o2.basket.onButton(this, '+1')">{% include '/assets/svg/busketPlus.svg' %}</button>
-						</div>
 					</div>
-				</li> #}
-			</div>
+					<div class="basket__text">
+						<div class="basket__text-brand _item-brand">Aesop</div>
+						<div class="basket__text-name _item-name">Rose Hair & Scalp Moisturising Masque</div>
+						<div class="basket__text-price _basket-price">5 600 ₽</div>
+					</div>
+				</div>
+				<div class="basket__form">
+					<button class="basket__form-btn" onclick="o2.basket.onClick(this, '-1')">{% include 'assets/svg/basketMinus.svg' %}</button>
+					<div class="basket__form-input _basket-input">5</div>
+					<button class="basket__form-btn" onclick="o2.basket.onClick(this, '+1')">{% include 'assets/svg/basketPlus.svg' %}</button>
+				</div>
+			</li>
+			<li class="basket__item _basket-item" data-index-item="2">
+				<div class="basket__item-content">
+					<div class="basket__item-img-wrapper">
+						<picture class="basket__item-picture">
+							<source class="_item-source" srcset="img/img1.webp" type="image/webp">
+							<img class="basket__item-img _item-jpg" src="img/img1.jpg" alt="Logo" width="57px">
+						</picture>
+					</div>
+					<div class="basket__text">
+						<div class="basket__text-brand _item-brand">Aesop</div>
+						<div class="basket__text-name _item-name">Rose Hair & Scalp Moisturising Masque</div>
+						<div class="basket__text-price _basket-price">5 600 ₽</div>
+					</div>
+				</div>
+				<div class="basket__form">
+					<button class="basket__form-btn" onclick="o2.basket.onClick(this, '-1')">{% include 'assets/svg/basketMinus.svg' %}</button>
+					<div class="basket__form-input _basket-input">5</div>
+					<button class="basket__form-btn" onclick="o2.basket.onClick(this, '+1')">{% include 'assets/svg/basketPlus.svg' %}</button>
+				</div>
+			</li>
+			<li class="basket__item _basket-item" data-index-item="3">
+				<div class="basket__item-content">
+					<div class="basket__item-img-wrapper">
+						<picture class="basket__item-picture">
+							<source class="_item-source" srcset="img/img1.webp" type="image/webp">
+							<img class="basket__item-img _item-jpg" src="img/img1.jpg" alt="Logo" width="57px">
+						</picture>
+					</div>
+					<div class="basket__text">
+						<div class="basket__text-brand _item-brand">Aesop</div>
+						<div class="basket__text-name _item-name">Rose Hair & Scalp Moisturising Masque</div>
+						<div class="basket__text-price _basket-price">5 600 ₽</div>
+					</div>
+				</div>
+				<div class="basket__form">
+					<button class="basket__form-btn" onclick="o2.basket.onClick(this, '-1')">{% include 'assets/svg/basketMinus.svg' %}</button>
+					<div class="basket__form-input _basket-input">5</div>
+					<button class="basket__form-btn" onclick="o2.basket.onClick(this, '+1')">{% include 'assets/svg/basketPlus.svg' %}</button>
+				</div>
+			</li>
+		</ul>
 		<div class="basket__footer">
-			<div class="basket__footer-text">
-				<span class="basket__price _sum">0 ₽</span>
-				<span class="basket__counter _counters">0 товаров<span>
-		</div>
-			<button class="basket__footer-button">Оформить заказ</button>
+			<div class="basket__text">
+				<div class="basket__footer-summary _basket-summary">9 968 ₽</div>
+				<div class="basket__footer-amount _basket-amount">5 товаров</div>
+			</div>
+			<button class="basket__footer-btn">Оформить заказ</button>
 		</div>
 	</div>
-</div>
-{# <script>o2.basket.init([{name: '1'}, {name: '2'}]);</script> #}
+</section>

@@ -1,159 +1,160 @@
-o2.basket ={
-	state:{
-		sum: 0,
-		count: 0,
-		items: [
-			{
-				id: 1,
-				price: 2000,
-				count: 1,
-				webp: "./img/logo.webp",
-				jpg: "./img/logo.jpg",
-				name: "Rose Hair & Scalp Moisturising Masque",
-				brand: "Aesop",
-			},
-
-			{
-				id: 2,
-				price: 500,
-				count: 2,
-				webp: "./img/image.webp",
-				jpg: "./img/image.jpg",
-				name: "Citrues Melange Body Cleanser",
-				brand: "Aesop",
-			},
-
-			{
-				id: 3,
-				price: 1,
-				count: 3,
-				webp: "./img/image.webp",
-				jpg: "./img/image.jpg",
-				name: "Shine Hair & Beard Oil",
-				brand: "Aesop",
-			},
-		],
+o2.basket = {
+	state: {
+		summary: 0,
+		amount: 0,
+		items:
+		[
+		{
+			id: 1,
+			price: 5601,
+			amount: 1,
+			brand: 'Aesop',
+			name: 'Rose Hair & Scalp Moisturising Masque',
+			webp: 'img/img1.webp',
+			jpg: 'img/img1.jpg',
+		},
+		{
+			id: 2,
+			price: 5602,
+			amount: 1,
+			brand: 'Aesop',
+			name: 'Citrues Melange Body Cleanser',
+			webp: 'img/img2.webp',
+			jpg: 'img/img2.jpg',
+		},
+		{
+			id: 3,
+			price: 5603,
+			amount: 1,
+			brand: 'Aesop',
+			name: 'Shine Hair & Beard Oil',
+			webp: 'img/img3.webp',
+			jpg: 'img/img3.jpg',
+		},
+		]
 	},
 
 	init() {
-		this.calculate();
-		this.render();
+		this.calculateBasket();
+		this.renderBasket();
+		this.renderAllItem()
+	},
+	onClick(instance, change){
+		this.changeItemAmount(instance, change);
+		this.renderItem(instance);
+		this.calculateBasket();
+		this.renderBasket(instance);
 	},
 
-	onClick(instance, change) {
-		this.count(instance, change);
-		this.calculate();
-		this.render();
-		this.cleanArray();
+	calculateBasket() {
+		this.calculateBasketAmaunt();
+		this.calculateBasketSummary();
 	},
 
-	calculate() {
-		this.calculateSum();
-		this.calculateCounters();
+	renderBasket(instance) {
+		this.renderBasketAmount(instance);
+		this.renderBasketSummury(instance);
 	},
 
-	render() {
-		this.renderSum();
-		this.renderCounters();
-		this.renderItems();
-	},
-
-	cleanArray() {
-		for (let item of this.state.items) {
-			if (item.count < 1) {
-				this.state.items.splice(item, 1);
-			}
-		}
-	},
-
-	count(instance, change) {
-		const card = instance.closest("._basket-item");
-		const cardId = Number(card.dataset.idItem);
-		let sign = change[0];
-		size = Number(change.substring(1));
-
-		const targetItem = this.state.items.find((item) => (item.id === cardId));
-		if (sign === "+") {
-			++targetItem.count;
-		} else if (targetItem.count > 0){
-			--targetItem.count;
-		}
-	},
-
-	renderItems() {
-		const itemsList = document.querySelector("._basket-list");
-		itemsList.innerHTML = "";
+	calculateBasketAmaunt() {
+		let itemsAmount = 0;
 
 		for (let item of this.state.items) {
-			if (item.count > 0) {
-				itemsList.innerHTML += this.createItem(item);
-			}
-		}
-	},
-
-	calculateSum() {
-		let sum = 0;
-
-		for (item of this.state.items) {
-			sum += item.count * item.price;
+			itemsAmount += item.amount;
 		}
 
-		this.state.sum = sum;
+		this.state.amount = itemsAmount;
 	},
 
-	renderSum() {
-		const sumContainer = document.querySelector('._sum');
-		sumContainer.innerText = this.formatPrice(this.state.sum);
-	},
-
-	calculateCounters() {
-		let count = 0;
+	calculateBasketSummary() {
+		let itemsSummary = 0;
 
 		for (let item of this.state.items) {
-			count += item.count ;
+			itemsSummary += item.amount * item.price;
 		}
 
-		this.state.count = count;
+		this.state.summary = itemsSummary;
 	},
 
-	renderCounters() {
-		const countContainer = document.querySelector('._counters');
-		countContainer.innerText = String(`${this.state.count} товаров`);
+	changeItemAmount(instance, change) {
+		const basketItem = instance.closest('._basket-item');
+		const currentCardId = +basketItem.dataset.indexItem;
+		const cardId = this.state.items.findIndex( (item) => (item.id === currentCardId) )
+		const sign = change[0];
+		const quantity = +change.substring(1);
+
+		let targetItem = this.state.items[cardId]
+		if (sign === '+') {
+			targetItem.amount += quantity
+		} else if (targetItem.amount >0 ){
+			targetItem.amount -= quantity
+		}
 	},
 
-	createItem(item){
-		itemHtml = `<div class="basket__item _basket-item" data-id-item="${item.id}">
-						<picture>
-							<source srcset="${item.webp}" type="image/webp">
-							<img class="basket__img" src="${item.jpg}" alt="image name">
-						</picture>
-						<div class="basket__text">
-							<div class="basket__text-title">${item.brand}</div>
-							<div class="basket__text-name">${item.name}</div>
-							<div class="basket__text-price _price">${this.formatPrice(item.price)}</div>
-						</div>
-						<div class="basket__buttons _buttons">
-							<button class="basket__button" onclick="o2.basket.onClick(this, '-1')">
-								<picture>
-									<source srcset="./svg/busketMinus.svg" type="svg/webp">
-									<img class="basket__img" src="./svg/busketMinus.svg" alt="image name">
-								</picture>
-							</button>
-							<div class="basket__button basket__button--color-inversion _counter">${item.count}</div>
-							<button class="basket__button" onclick="o2.basket.onClick(this, '+1')">
-								<picture>
-									<source srcset="./svg/busketPlus.svg" type="svg/webp">
-									<img class="basket__img" src="./svg/busketPlus.svg" alt="image name">
-								</picture>
-							</button>
-						</div>
-					</div>`;
-		return itemHtml;
+	renderBasketAmount(instance=null) {
+		const basketAmount = instance === null ? document.querySelector('._basket-amount') : instance.closest("._basket").querySelector('._basket-amount');
+		basketAmount.textContent = `${this.state.amount} ${this.formatAmount(this.state.amount, ['товар', 'товара', 'товаров'])}`;
+	},
+
+	renderBasketSummury(instance=null) {
+		const basketSummury = instance === null ? document.querySelector('._basket-summary') : instance.closest("._basket").querySelector('._basket-summary');
+		basketSummury.textContent = this.formatPrice(this.state.summary);
+	},
+
+	renderAllItem() {
+		const allItem = document.querySelectorAll("._basket-input");
+		allItem.forEach( (input) => this.renderItem(input) )
+	},
+
+	renderItem(instance) {
+		const basketItem = instance.closest('._basket-item');
+		const currentCardId = +basketItem.dataset.indexItem;
+		const cardId = this.state.items.findIndex( (item) => (item.id === currentCardId) );
+		this.renderItemAmount(basketItem, cardId);
+		this.renderItemPrice(basketItem, cardId);
+		this.renderItemBrand(basketItem, cardId);
+		this.renderItemName(basketItem, cardId);
+		this.addItemImageSrc(basketItem, cardId);
+	},
+
+	renderItemAmount(basketItem, cardId) {
+		const currentInput = basketItem.querySelector("._basket-input");
+		currentInput.textContent = this.state.items[cardId].amount;
+	},
+
+	renderItemPrice(basketItem, cardId) {
+		const currentPrice = basketItem.querySelector("._basket-price");
+		currentPrice.textContent = this.formatPrice(this.state.items[cardId].price);
+	},
+
+	renderItemBrand(basketItem, cardId) {
+		console.log('renderItemBrand')
+		const currentPrice = basketItem.querySelector("._item-brand");
+		currentPrice.textContent = `${this.state.items[cardId].brand}`;
+	},
+
+	renderItemName(basketItem, cardId) {
+		console.log('renderItemName')
+		const currentPrice = basketItem.querySelector("._item-name");
+		currentPrice.textContent = `${this.state.items[cardId].name}`;
+	},
+
+	addItemImageSrc(basketItem, cardId) {
+		const currentImg = basketItem.querySelector("._item-jpg")
+		currentImg.src = `${this.state.items[cardId].jpg}`;
+		const currentSource = basketItem.querySelector("._item-source");
+		currentSource.srcset = `${this.state.items[cardId].webp}`
 	},
 
 	formatPrice(num) {
 		return String(num).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') + " ₽";
 	},
+
+	formatAmount(value, words) {
+		const cases = [2, 0, 1, 1, 1, 2];
+		return words[(value % 100 > 4 && value % 100 < 20) ? 2 : cases[(value % 10 < 5) ? value % 10 : 5]];
+	},
+
 }
 
 o2.basket.init();

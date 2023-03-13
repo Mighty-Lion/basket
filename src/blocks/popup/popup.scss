@@ -1,35 +1,15 @@
 .popup
 {
+	position: fixed;
+	top: 0;
+	left: 0;
 	display: none;
 	align-items: center;
 	justify-content: center;
-
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
-	z-index: 999999;
-	background: rgba(0, 0, 0, 0.5);
-
-}
-
-.popup__content
-{
-	position: absolute;
-	left: -100vw;
+	padding: 10px;
 	width: 100%;
-	max-width: 600px;
-	border-radius: 5px;
-	background-color: white;
-	margin: 100px auto;
-	transform: translateY(-10px);
-}
-._open
-{
-	display: flex;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
 }
 
-._close{
-	z-index: 9999999999;
-}
+.popup-open { display: flex;}

@@ -1,48 +1,29 @@
 o2.popup = {
+	overlay: document.querySelector('._popup-overlay'),
+	body: document.querySelector('body'),
+
 	open(contentClass) {
-		const overlay = document.querySelector('._overlay');
-		const body = document.querySelector('body');
-		let contentHtml = document.querySelector(`.${contentClass}`).innerHTML;
-		overlay.innerHTML = contentHtml;
-		// document.querySelector(`.${contentClass}`).remove(); // for basket
-		overlay.classList.add('_open');
-		body.style.overflow = 'hidden';
+		const contentHtml = document.querySelector(contentClass).innerHTML;
+		this.overlay.innerHTML = contentHtml;
+		this.body.style.overflow = "hidden";
+		this.overlay.classList.add('popup-open');
 	},
 
 	close() {
-		const overlay = document.querySelector('._overlay');
-		const body = document.querySelector('body');
-		body.style.overflow = 'visible';
-		overlay.classList.remove('_open');
+		this.overlay.classList.remove('popup-open');
+		this.body.style.overflow = "visible";
 	},
 
 	outsideClick(event) {
-		const openClass = document.querySelector('._open');
-		const boolOpen = event.composedPath().includes(openClass);
-
-		if ((boolOpen == true) && (event.target.classList.contains('_open') === true)) {
-			this.close();
-		}
-
-		this.setEscEvent();
+		const composedOverlayBool = event.composedPath().includes(this.overlay);
+		const targetOverlay = event.target.contains(this.overlay);
+		if (composedOverlayBool && targetOverlay)  this.close();
+		this.setEscEvent(event);
 	},
 
-	setEscEvent()
-	{
-		window.onkeydown = () => { (event.key === 'Escape') && (this.close()) };
-	},
+	setEscEvent(event) {
+		window.onkeydown =  (event) => { (event.key === 'Escape' && this.close()) }
+	}
 }
 
-window.addEventListener('click', () => o2.popup.outsideClick(event));
-
-overlay
-	content
-		item
-		item
-		item
-		item
-	content.newClass
-		hasDataasd
-		asd
-		asd
-	
+window.addEventListener( "click", (event) => o2.popup.outsideClick(event))

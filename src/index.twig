@@ -2,9 +2,8 @@
 
 {% block page %}
 <div class="container">
-	<a class="button" onclick="o2.popup.open('_popup-content')">Button</a>
-
-	{% include '/blocks/popup/popup.twig' %}
-	{% include '/blocks/basket/basket.twig' %}
+		<button onclick="o2.popup.open('._basket-content')">Basket</button>
+		{% include '/blocks/basket/basket.twig' %}
+		{% include '/blocks/popup/popup.twig' %}
 </div>
 {% endblock %}
