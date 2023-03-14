@@ -36,14 +36,14 @@ o2.basket = {
 
 	init() {
 		this.calculateBasket();
-		this.renderBasket();
-		this.renderAllItem()
+		this.changeBasket();
+		this.changeAllItem()
 	},
 	onClick(instance, change){
 		this.changeItemAmount(instance, change);
-		this.renderItem(instance);
+		this.changeItem(instance);
 		this.calculateBasket();
-		this.renderBasket(instance);
+		this.changeBasket(instance);
 	},
 
 	calculateBasket() {
@@ -51,9 +51,9 @@ o2.basket = {
 		this.calculateBasketSummary();
 	},
 
-	renderBasket(instance) {
-		this.renderBasketAmount(instance);
-		this.renderBasketSummury(instance);
+	changeBasket(instance) {
+		this.changeBasketAmount(instance);
+		this.changeBasketSummury(instance);
 	},
 
 	calculateBasketAmaunt() {
@@ -91,29 +91,29 @@ o2.basket = {
 		}
 	},
 
-	renderBasketAmount(instance=null) {
+	changeBasketAmount(instance=null) {
 		const basketAmount = !instance ? document.querySelector('._basket-amount') : instance.closest("._basket").querySelector('._basket-amount');
 		basketAmount.textContent = `${this.state.amount} ${this.formatAmount(this.state.amount, ['товар', 'товара', 'товаров'])}`;
 	},
 
-	renderBasketSummury(instance=null) {
+	changeBasketSummury(instance=null) {
 		const basketSummury = !instance ? document.querySelector('._basket-summary') : instance.closest("._basket").querySelector('._basket-summary');
 		basketSummury.textContent = this.formatPrice(this.state.summary);
 	},
 
-	renderAllItem() {
+	changeAllItem() {
 		const allItem = document.querySelectorAll("._basket-input");
-		allItem.forEach( (input) => this.renderItem(input) )
+		allItem.forEach( (input) => this.changeItem(input) )
 	},
 
-	renderItem(instance) {
+	changeItem(instance) {
 		const basketItem = instance.closest('._basket-item');
 		const currentCardId = +basketItem.dataset.indexItem;
 		const cardId = this.state.items.findIndex( (item) => (item.id === currentCardId) );
-		this.renderItemAmount(basketItem, cardId);
-		this.renderItemPrice(basketItem, cardId);
-		this.renderItemBrand(basketItem, cardId);
-		this.renderItemName(basketItem, cardId);
+		this.addItemAmount(basketItem, cardId);
+		this.addItemPrice(basketItem, cardId);
+		this.addItemBrand(basketItem, cardId);
+		this.addItemName(basketItem, cardId);
 		this.addItemImageSrc(basketItem, cardId);
 		this.addMaskForItem(basketItem, cardId);
 	},
@@ -132,22 +132,22 @@ o2.basket = {
 		basketItem.remove();
 	},
 
-	renderItemAmount(basketItem, cardId) {
+	addItemAmount(basketItem, cardId) {
 		const currentInput = basketItem.querySelector("._basket-input");
 		currentInput.textContent = this.state.items[cardId].amount;
 	},
 
-	renderItemPrice(basketItem, cardId) {
+	addItemPrice(basketItem, cardId) {
 		const currentPrice = basketItem.querySelector("._basket-price");
 		currentPrice.textContent = this.formatPrice(this.state.items[cardId].price);
 	},
 
-	renderItemBrand(basketItem, cardId) {
+	addItemBrand(basketItem, cardId) {
 		const currentPrice = basketItem.querySelector("._item-brand");
 		currentPrice.textContent = `${this.state.items[cardId].brand}`;
 	},
 
-	renderItemName(basketItem, cardId) {
+	addItemName(basketItem, cardId) {
 		const currentPrice = basketItem.querySelector("._item-name");
 		currentPrice.textContent = `${this.state.items[cardId].name}`;
 	},
