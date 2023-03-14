@@ -77,13 +77,11 @@ o2.basket = {
 	},
 
 	changeItemAmount(instance, change) {
-		const basketItem = instance.closest('._basket-item');
-		const currentCardId = +basketItem.dataset.indexItem;
-		const cardId = this.state.items.findIndex( (item) => (item.id === currentCardId) )
+		const itemData = this.getDataOfBasketItem(instance);
 		const sign = change[0];
 		const quantity = +change.substring(1);
 
-		let targetItem = this.state.items[cardId]
+		let targetItem = this.state.items[itemData.cardId]
 		if (sign === '+') {
 			targetItem.amount += quantity
 		} else if (targetItem.amount >0 ){
@@ -103,19 +101,25 @@ o2.basket = {
 
 	changeAllItem() {
 		const allItem = document.querySelectorAll("._basket-input");
-		allItem.forEach( (input) => this.changeItem(input) )
+		allItem.forEach( (input) => this.changeItem(input) );
 	},
 
-	changeItem(instance) {
+	getDataOfBasketItem(instance) {
 		const basketItem = instance.closest('._basket-item');
 		const currentCardId = +basketItem.dataset.indexItem;
 		const cardId = this.state.items.findIndex( (item) => (item.id === currentCardId) );
-		this.addItemAmount(basketItem, cardId);
-		this.addItemPrice(basketItem, cardId);
-		this.addItemBrand(basketItem, cardId);
-		this.addItemName(basketItem, cardId);
-		this.addItemImageSrc(basketItem, cardId);
-		this.addMaskForItem(basketItem, cardId);
+
+		return { basketItem, cardId }
+	},
+
+	changeItem(instance) {
+		const itemData = this.getDataOfBasketItem(instance);
+		this.addItemAmount(itemData.basketItem, itemData.cardId);
+		this.addItemPrice(itemData.basketItem, itemData.cardId);
+		this.addItemBrand(itemData.basketItem, itemData.cardId);
+		this.addItemName(itemData.basketItem, itemData.cardId);
+		this.addItemImageSrc(itemData.basketItem, itemData.cardId);
+		this.addMaskForItem(itemData.basketItem, itemData.cardId);
 	},
 
 	addMaskForItem(basketItem, cardId) {
@@ -127,9 +131,9 @@ o2.basket = {
 	},
 
 	deleteItem(instance) {
-		console.log("deleteItem");
 		const basketItem = instance.closest('._basket-item');
 		basketItem.remove();
+		this.deleteObjectOfArray(instance);
 	},
 
 	addItemAmount(basketItem, cardId) {
@@ -157,6 +161,11 @@ o2.basket = {
 		currentImg.src = `${this.state.items[cardId].jpg}`;
 		const currentSource = basketItem.querySelector("._item-source");
 		currentSource.srcset = `${this.state.items[cardId].webp}`
+	},
+
+	deleteObjectOfArray(instance) {
+		const itemData = this.getDataOfBasketItem(instance);
+		this.state.items.splice(itemData.cardId, 1);
 	},
 
 	formatPrice(num) {
