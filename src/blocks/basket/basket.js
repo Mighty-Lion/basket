@@ -92,12 +92,12 @@ o2.basket = {
 	},
 
 	renderBasketAmount(instance=null) {
-		const basketAmount = instance === null ? document.querySelector('._basket-amount') : instance.closest("._basket").querySelector('._basket-amount');
+		const basketAmount = !instance ? document.querySelector('._basket-amount') : instance.closest("._basket").querySelector('._basket-amount');
 		basketAmount.textContent = `${this.state.amount} ${this.formatAmount(this.state.amount, ['товар', 'товара', 'товаров'])}`;
 	},
 
 	renderBasketSummury(instance=null) {
-		const basketSummury = instance === null ? document.querySelector('._basket-summary') : instance.closest("._basket").querySelector('._basket-summary');
+		const basketSummury = !instance ? document.querySelector('._basket-summary') : instance.closest("._basket").querySelector('._basket-summary');
 		basketSummury.textContent = this.formatPrice(this.state.summary);
 	},
 
