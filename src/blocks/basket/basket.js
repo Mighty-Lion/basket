@@ -115,6 +115,21 @@ o2.basket = {
 		this.renderItemBrand(basketItem, cardId);
 		this.renderItemName(basketItem, cardId);
 		this.addItemImageSrc(basketItem, cardId);
+		this.addMaskForItem(basketItem, cardId);
+	},
+
+	addMaskForItem(basketItem, cardId) {
+		if (this.state.items[cardId].amount < 1) basketItem.querySelector('._item-mask').classList.add("basket__item-mask--open");
+	},
+
+	removeMaskForItem(instance) {
+		instance.closest('._item-mask').classList.remove("basket__item-mask--open");
+	},
+
+	deleteItem(instance) {
+		console.log("deleteItem");
+		const basketItem = instance.closest('._basket-item');
+		basketItem.remove();
 	},
 
 	renderItemAmount(basketItem, cardId) {
@@ -128,13 +143,11 @@ o2.basket = {
 	},
 
 	renderItemBrand(basketItem, cardId) {
-		console.log('renderItemBrand')
 		const currentPrice = basketItem.querySelector("._item-brand");
 		currentPrice.textContent = `${this.state.items[cardId].brand}`;
 	},
 
 	renderItemName(basketItem, cardId) {
-		console.log('renderItemName')
 		const currentPrice = basketItem.querySelector("._item-name");
 		currentPrice.textContent = `${this.state.items[cardId].name}`;
 	},
