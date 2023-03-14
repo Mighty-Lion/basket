@@ -119,15 +119,16 @@ o2.basket = {
 		this.addItemBrand(itemData.basketItem, itemData.cardId);
 		this.addItemName(itemData.basketItem, itemData.cardId);
 		this.addItemImageSrc(itemData.basketItem, itemData.cardId);
-		this.addMaskForItem(itemData.basketItem, itemData.cardId);
+		this.addMaskForItem(instance);
 	},
 
-	addMaskForItem(basketItem, cardId) {
-		if (this.state.items[cardId].amount < 1) basketItem.querySelector('._item-mask').classList.add("basket__item-mask--open");
+	addMaskForItem(instance, bool = null) {
+		const itemData = this.getDataOfBasketItem(instance);
+		if (this.state.items[itemData.cardId].amount < 1 || bool === true ) itemData.basketItem.querySelector('._item-mask').classList.add("basket__item-mask--open");
 	},
 
 	removeMaskForItem(instance) {
-		instance.closest('._item-mask').classList.remove("basket__item-mask--open");
+		instance.closest('._basket-item').querySelector('._item-mask').classList.remove("basket__item-mask--open");
 	},
 
 	deleteItem(instance) {

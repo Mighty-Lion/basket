@@ -68,6 +68,45 @@
 	&--open { display: flex;}
 }
 
+.basket__item-delete
+{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+
+	display: flex;
+	border: none;
+	height: 20px;
+	width: 20px;
+	background: inherit;
+	border-radius: 50%;
+
+	&:hover {background: rgba(219, 10, 91, 0.3)}
+
+	svg
+	{
+		&:hover {fill: red;}
+	}
+}
+
+.basket__item-mask-delete
+{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+
+	display: flex;
+	border: none;
+	height: 20px;
+	width: 20px;
+	// background: inherit;
+	border-radius: 50%;
+	z-index: 999999999;
+	background: rgba(219, 10, 91, 0.3);
+
+	svg {fill: red;};
+}
+
 .basket__btn-mask
 {
 	display: flex;
