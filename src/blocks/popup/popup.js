@@ -6,11 +6,11 @@ o2.popup = {
 		const contentHtml = document.querySelector(contentClass).innerHTML;
 		this.overlay.innerHTML = contentHtml;
 		this.body.style.overflow = "hidden";
-		this.overlay.classList.add('popup-open');
+		this.overlay.classList.add('popup__open');
 	},
 
 	close() {
-		this.overlay.classList.remove('popup-open');
+		this.overlay.classList.remove('popup__open');
 		this.body.style.overflow = "visible";
 	},
 
